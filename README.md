@@ -1,12 +1,12 @@
 # ansible-seedbox-jellyfin-server
 
-## Description
+## Description :
 
 I share you the playbook that I use to deploy my seedbox installation using :
 - Flood and rtorrent : https://hub.docker.com/r/romancin/rutorrent-flood
 - Jellyfin : https://hub.docker.com/r/linuxserver/jellyfin
 
-### Requirement
+### Requirements :
 
 A Debian running machine (or an other Debian OS based).
 A root user or an user with sudo privileges.
