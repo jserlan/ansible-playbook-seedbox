@@ -1,4 +1,4 @@
-# ansible-seedbox-jellyfin-server
+# ansible-seedbox-server
 
 ## Description :
 
