@@ -1,0 +1,58 @@
+---
+- name: "Installing Docker requirements"
+  apt:
+    name: "{{ packages['docker_requirements'] }}"
+    update_cache: yes
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: "Adding the official Docker's GPG key in APT"
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: "Setting the stable Docker's repository"
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
+    update_cache: yes
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: "Installing Docker packages"
+  apt:
+    name: "{{ packages['docker_common'] }}"
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: "Installing the Python3 package installer"
+  apt:
+    name: "{{ packages['docker_python3'] }}"
+    state: present
+  when: ansible_os_family == 'Debian' and ansible_python.version.major == 3
+
+- name: "Installing the Python package installer"
+  apt:
+    name: "{{ packages['docker_python'] }}"
+    state: present
+  when: ansible_os_family == 'Debian' and ansible_python.version.major != 3
+
+- name: "Installing Docker SDK for Python"
+  pip:
+    name: docker-py
+
+- name: "Checking Docker installation by running the hello-world image"
+  docker_container:
+    name: hello-world
+    image: hello-world
+    state: started
+
+- name: "Stopping container hello-world image"
+  docker_container:
+    name: hello-world
+    state: stopped
+
+- name: "Removing the container hello-world image"
+  docker_container:
+    name: hello-world
+    state: absent

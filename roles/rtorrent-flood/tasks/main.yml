@@ -1,0 +1,26 @@
+---
+- name: "Creating the docker volume flood config"
+  docker_volume:
+    name: flood-config
+    state: present
+
+- name: "Creating the docker volume flood downloads"
+  docker_volume:
+    name: flood-downloads
+    state: present
+
+- name: "Starting container rutorrent-flood image"
+  docker_container:
+    name: rutorrent-flood
+    image: romancin/rutorrent-flood:latest
+    env:
+      PGID: "{{ pgid }}"
+      PUID: "{{ puid }}"
+      TZ: "{{ timezone | default(ansible_date_time.tz) }}"
+    detach: True
+    ports: "{{ bind_ports | list }}"
+    volumes:
+      - flood-config:/config
+      - flood-downloads:/downloads
+    restart_policy: always
+    state: started

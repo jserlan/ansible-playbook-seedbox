@@ -1,0 +1,28 @@
+---
+- name: "Creating the docker volume jellyfin config"
+  docker_volume:
+    name: jellyfin-config
+    state: present
+
+- name: "Creating the docker volume jellyfin data"
+  docker_volume:
+    name: jellyfin-data
+    state: present
+
+- name: "Starting container jellyfin-server image"
+  docker_container:
+    name: jellyfin-server
+    image: linuxserver/jellyfin
+    env:
+      UID: "{{ uid }}"
+      GID: "{{ gid }}"
+      UMASK_SET: "{{ umask }}"
+      TZ: "{{ timezone | default(ansible_date_time.tz) }}"
+    detach: True
+    ports: "{{ bind_ports | list }}"
+    volumes:
+      - jellyfin-config:/config
+      - jellyfin-data:/media-library
+      - flood-downloads:/downloads
+    restart_policy: always
+    state: started
