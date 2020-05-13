@@ -13,5 +13,5 @@
     - role: docker
     - role: rtorrent-flood
     - role: jellyfin-server
-    - role: fail2ban
-    - role: ufw
+    # - role: fail2ban
+    # - role: ufw

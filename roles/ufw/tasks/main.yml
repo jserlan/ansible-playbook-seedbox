@@ -3,6 +3,7 @@
   apt:
     name: ufw
     state: present
+  when: ansible_os_family == 'Debian'
 
 - name: "Setting deny anything by default"
   ufw:

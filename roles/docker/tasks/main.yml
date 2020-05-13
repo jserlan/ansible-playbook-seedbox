@@ -1,41 +1,22 @@
 ---
-- name: "Installing Docker requirements"
-  apt:
-    name: "{{ packages['docker_requirements'] }}"
-    update_cache: yes
-    state: present
-  when: ansible_os_family == 'Debian'
+# Import the tasks file for installing Docker on Debian/Ubuntu
+- name: "Include Debian"
+  include_tasks: debian.yml
+  when: ansible_distribution == 'Debian'
 
-- name: "Adding the official Docker's GPG key in APT"
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
-  when: ansible_os_family == 'Debian'
+- name: "Include Ubuntu"
+  include_tasks: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
 
-- name: "Setting the stable Docker's repository"
-  apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
-    update_cache: yes
-    state: present
-  when: ansible_os_family == 'Debian'
+# Import the tasks file for installing Docker on CentOS
+- name: "Include CentOS"
+  include_tasks: centos.yml
+  when: ansible_distribution == 'CentOS'
 
-- name: "Installing Docker packages"
-  apt:
-    name: "{{ packages['docker_common'] }}"
-    state: present
-  when: ansible_os_family == 'Debian'
-
-- name: "Installing the Python3 package installer"
-  apt:
-    name: "{{ packages['docker_python3'] }}"
-    state: present
-  when: ansible_os_family == 'Debian' and ansible_python.version.major == 3
-
-- name: "Installing the Python package installer"
-  apt:
-    name: "{{ packages['docker_python'] }}"
-    state: present
-  when: ansible_os_family == 'Debian' and ansible_python.version.major != 3
+# Import the tasks file for installing Docker on CentOS
+- name: "Include Fedora"
+  include_tasks: fedora.yml
+  when: ansible_distribution == 'Fedora'
 
 - name: "Installing Docker SDK for Python"
   pip:

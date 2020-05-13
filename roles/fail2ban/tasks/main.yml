@@ -10,3 +10,4 @@
     name: fail2ban
     enabled: yes
     state: started
+  when: ansible_os_family == 'Debian'
