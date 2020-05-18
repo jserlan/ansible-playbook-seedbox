@@ -7,13 +7,13 @@
 - name: "Installing Docker requirements"
   dnf:
     name:
-    - dnf-plugins-core
-    - python3-dnf
+      - dnf-plugins-core
+      - python3-dnf
     state: present
   when: ansible_python.version.major == 3
 
 - name: "Setting the official Docker's repository"
-  shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+  shell: dnf config-manager --add-repo "{{ repository[ansible_distribution].name }}"
 
 - name: "Switching to cgroup v1"
   shell: grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
@@ -21,33 +21,29 @@
 
 - name: "Installing Docker packages"
   dnf:
-    name:
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
+    name: "{{ common_packages.docker_packages }}"
     enablerepo: docker-ce-stable
     state: present
-    
+
 - name: "Starting and enable the Docker service"
   service:
     name: docker
     state: started
     enabled: yes
-    
+
 - name: "Installing the Python3 package installer"
   dnf:
     name:
-        - python3-pip
+      - python3-pip
     state: present
   when: ansible_python.version.major == 3
-    
+
 - name: "Installing the Python package installer"
   dnf:
     name:
-        - epel-release
-        - python2-pip
-        - python-docker-py
-        - python-setuptools
-        - python3-pip
+      - epel-release
+      - python2-pip
+      - python-docker-py
+      - python-setuptools
     state: present
   when: ansible_python.version.major != 3

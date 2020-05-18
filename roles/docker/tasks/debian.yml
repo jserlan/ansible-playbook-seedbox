@@ -18,7 +18,7 @@
 
 - name: "Installing Docker packages"
   apt:
-    name: "{{ debian_packages['docker_common'] }}"
+    name: "{{ common_packages.docker_packages }}"
     update_cache: yes
     state: present
 
