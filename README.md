@@ -23,7 +23,7 @@ hosts/ : contains the hosts file used by the playbook. Here you can define the I
 
 ### Clone the repository :
 
-    git clone https://github.com/jserlan/ansible-seedbox-jellyfin-server.git
+    git clone https://github.com/jserlan/ansible-playbooks-seedbox.git
 
 ### Run the playbook :
 
