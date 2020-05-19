@@ -27,7 +27,7 @@ hosts/ : contains the hosts file used by the playbook. Here you can define the I
 
 ### Run the playbook :
 
-    ansible-playbook --user $USERNAME --ask-pass --become --ask-become-pass -i hosts/seedbox deploy-seedbox.yml
+    ansible-playbook --user $USERNAME --ask-pass --become --ask-become-pass -i hosts/default deploy-seedbox.yml
 
 Playbook arguments :
 
