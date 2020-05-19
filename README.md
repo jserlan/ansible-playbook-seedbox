@@ -45,8 +45,8 @@ Playbook arguments :
 
 ### Jellyfin :
 
-Once the playbook installation is finished, you can reach Jellyfin by connecting to http://<your IP>:8096/ to set the configuration.
+Once the playbook installation is finished, you can reach Jellyfin by connecting to http://\<your IP\>:8096/ to set the configuration.
 
 ### Flood/rtorrent :
 
-One the playbook installation is finished for Flood and rTorrent, you can reach Flood by connecting to http://<your IP>:3000/ to set the configuration.
+One the playbook installation is finished for Flood and rTorrent, you can reach Flood by connecting to http://\<your IP\>:3000/ to set the configuration.
