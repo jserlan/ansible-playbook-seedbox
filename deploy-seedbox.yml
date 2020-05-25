@@ -3,15 +3,7 @@
   hosts: seedbox
   vars:
     timezone: "Europe/Paris"
-    public_ports:
-      jellyfin: "8096"
-      # jellyfin_ssl: "8920"
-      flood: "3000"
-      # flood_ssl: "9443"
-      rtorrent: "51415"
   roles:
     - role: docker
     - role: rtorrent-flood
     - role: jellyfin-server
-    # - role: fail2ban
-    # - role: ufw
