@@ -9,14 +9,14 @@
   yum_repository:
     name: docker-ce-stable
     description: "Docker CE Stable - {{ ansible_architecture }}"
-    baseurl: "{{ repository[ansible_distribution].name }}"
+    baseurl: "{{ repository[ansible_distribution]['name'] }}"
     enabled: yes
     gpgcheck: yes
-    gpgkey: "{{ repository[ansible_distribution].key }}"
+    gpgkey: "{{ repository[ansible_distribution]['key'] }}"
 
 - name: "Installing Docker packages"
   yum:
-    name: "{{ common_packages.docker_packages }}"
+    name: "{{ common_packages['docker_packages'] }}"
     enablerepo: docker-ce-stable
     state: present
 

@@ -4,10 +4,10 @@
     name: flood-config
     state: present
 
-- name: "Creating the docker volume flood downloads"
-  docker_volume:
-    name: flood-downloads
-    state: present
+- name: "Creating the downloads directory"
+  file:
+    path: /var/local/downloads/
+    state: directory
 
 - name: "Starting container rutorrent-flood image"
   docker_container:
@@ -21,6 +21,6 @@
     ports: "{{ bind_ports | list }}"
     volumes:
       - flood-config:/config
-      - flood-downloads:/downloads
+      - /var/local/downloads/:/downloads
     restart_policy: always
     state: started

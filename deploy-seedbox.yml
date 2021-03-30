@@ -1,9 +1,10 @@
 ---
 - name: "Deploying a seedbox environment"
-  hosts: seedbox
+  hosts: all
   vars:
     timezone: "Europe/Paris"
   roles:
     - role: docker
     - role: rtorrent-flood
     - role: jellyfin-server
+    - role: nginx

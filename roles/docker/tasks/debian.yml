@@ -7,18 +7,18 @@
 
 - name: "Adding the official Docker's GPG key in APT"
   apt_key:
-    url: "{{ repository[ansible_distribution].key }}"
+    url: "{{ repository[ansible_distribution]['key'] }}"
     state: present
 
 - name: "Setting the stable Docker's repository"
   apt_repository:
-    repo: "{{ repository[ansible_distribution].name }}"
+    repo: "{{ repository[ansible_distribution]['name'] }}"
     update_cache: no
     state: present
 
 - name: "Installing Docker packages"
   apt:
-    name: "{{ common_packages.docker_packages }}"
+    name: "{{ common_packages['docker_packages'] }}"
     update_cache: yes
     state: present
 

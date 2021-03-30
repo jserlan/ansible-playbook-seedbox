@@ -1,0 +1,22 @@
+---
+- name: "Installing Nginx"
+  apt:
+    name: "{{ packages['nginx_common'] }}"
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: "Enabling Nginx service"
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
+
+# Import the tasks file for installing Docker on CentOS
+- name: "Include Jellyfin vhost configuration"
+  include_tasks: jellyfin.yml
+  # when: ansible_distribution == 'CentOS' and ansible_distribution_major_version|int < 8
+
+# Import the tasks file for installing Docker on CentOS
+- name: "Include Flood vhost configuration"
+  include_tasks: flood.yml
+  # when: ansible_distribution == 'CentOS' and ansible_distribution_major_version|int < 8

@@ -13,7 +13,7 @@
   when: ansible_python.version.major == 3
 
 - name: "Setting the official Docker's repository"
-  shell: dnf config-manager --add-repo "{{ repository[ansible_distribution].name }}"
+  shell: dnf config-manager --add-repo "{{ repository[ansible_distribution]['name'] }}"
 
 - name: "Switching to cgroup v1"
   shell: grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
@@ -21,7 +21,7 @@
 
 - name: "Installing Docker packages"
   dnf:
-    name: "{{ common_packages.docker_packages }}"
+    name: "{{ common_packages['docker_packages'] }}"
     enablerepo: docker-ce-stable
     state: present
 

@@ -1,0 +1,13 @@
+---
+- name: "Copying the vhost configuration"
+  copy:
+    src: jellyfin.conf
+    dest: /etc/nginx/sites-available/jellyfin.conf
+  notify: "Restart Nginx"
+
+- name: "Activating the Jellyfin vhost by creating a symlink"
+  file:
+    src: /etc/nginx/sites-available/jellyfin.conf
+    dest: /etc/nginx/sites-enabled/jellyfin.conf
+    state: link
+  notify: "Restart Nginx"

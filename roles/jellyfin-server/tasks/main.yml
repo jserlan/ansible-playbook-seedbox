@@ -4,10 +4,10 @@
     name: jellyfin-config
     state: present
 
-- name: "Creating the docker volume jellyfin data"
-  docker_volume:
-    name: jellyfin-data
-    state: present
+- name: "Creating the media-library directory"
+  file:
+    path: /var/local/media-library/
+    state: directory
 
 - name: "Starting container jellyfin-server image"
   docker_container:
@@ -22,7 +22,7 @@
     ports: "{{ bind_ports | list }}"
     volumes:
       - jellyfin-config:/config
-      - jellyfin-data:/media-library
-      - flood-downloads:/downloads
+      - /var/local/media-library/:/media-library
+      - /var/local/downloads/:/downloads
     restart_policy: always
     state: started

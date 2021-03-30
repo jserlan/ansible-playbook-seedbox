@@ -1,0 +1,13 @@
+---
+    - name: "Copying the vhost configuration"
+      copy:
+        src: flood.conf
+        dest: /etc/nginx/sites-available/flood.conf
+    
+    - name: "Activating the Flood vhost by creating a symlink"
+      file:
+        src: /etc/nginx/sites-available/flood.conf
+        dest: /etc/nginx/sites-enabled/flood.conf
+        state: link
+      notify: "Restart Nginx"
+    
