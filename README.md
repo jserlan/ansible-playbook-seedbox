@@ -1,4 +1,4 @@
-# ansible-seedbox-server
+# ansible-playbook-seedbox
 
 ## Description :
 
