@@ -12,6 +12,8 @@ The Docker images used :
 
 A Linux machine and a root user or at least an user with sudo privileges.
 
+Validate on : Debian 11 and over, Ubuntu 20 and over.
+
 ### Files and folders description
 
 deploy-seedbox.yml : list of role to deploy and the common variables. For instance, here you can edit you timezone or remove role from deployment.

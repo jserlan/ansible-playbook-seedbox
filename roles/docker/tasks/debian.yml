@@ -4,23 +4,27 @@
     name: "{{ debian_packages['docker_requirements'] }}"
     update_cache: yes
     state: present
+  when: ansible_distribution_major_version|int >= 11
 
 - name: "Adding the official Docker's GPG key in APT"
   apt_key:
     url: "{{ repository[ansible_distribution]['key'] }}"
     state: present
+  when: ansible_distribution_major_version|int >= 11
 
 - name: "Setting the stable Docker's repository"
   apt_repository:
     repo: "{{ repository[ansible_distribution]['name'] }}"
     update_cache: no
     state: present
+  when: ansible_distribution_major_version|int >= 11
 
 - name: "Installing Docker packages"
   apt:
     name: "{{ common_packages['docker_packages'] }}"
     update_cache: yes
     state: present
+  when: ansible_distribution_major_version|int >= 11
 
 - name: "Installing the Python3 package installer"
   apt:
