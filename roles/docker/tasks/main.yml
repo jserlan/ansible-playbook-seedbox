@@ -21,7 +21,7 @@
 - name: "Installing Docker SDK for Python"
   pip:
     name: docker-py
-  when: ansible_distribution != 'Debian'
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
 
 - name: "Checking Docker installation by running the hello-world image"
   docker_container:
