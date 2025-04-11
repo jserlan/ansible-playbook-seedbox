@@ -1,4 +1,4 @@
-Role Name
+docker
 =========
 
 This role deploy a Docker installation and configuration on Debian/Ubuntu.
